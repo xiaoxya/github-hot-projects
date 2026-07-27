@@ -89,8 +89,17 @@ else
     echo "  ✅ 虚拟环境已存在"
 fi
 
+# 确保 pip 可用（精简系统可能没装 ensurepip）
+if ! .venv/bin/python3 -m pip --version &>/dev/null; then
+    echo "  ⚠️  venv 缺少 pip，尝试安装..."
+    .venv/bin/python3 -m ensurepip --upgrade 2>/dev/null || {
+        echo "❌ 目标主机缺少 python3-venv / ensurepip，请先安装: apt install python3-venv"
+        exit 1
+    }
+fi
+
 # 安装依赖
-.venv/bin/pip install -r requirements.txt -q
+.venv/bin/python3 -m pip install -r requirements.txt -q
 echo "  ✅ 依赖已安装"
 
 # 验证
