@@ -194,7 +194,7 @@ def build_lark_card(repos, top_n):
             elements.append({"tag": "hr"})
 
     # 底部更新时间 + 来源提示
-    now_str = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+    now_str = datetime.now().strftime("%Y-%m-%d %H:%M")
     elements.append({
         "tag": "note",
         "elements": [{"tag": "plain_text", "content": f"🕐 更新于 {now_str} · 数据来源: GitHub API"}],
